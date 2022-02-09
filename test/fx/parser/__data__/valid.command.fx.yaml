@@ -1,0 +1,4 @@
+descriptor_version: v1beta
+synopsis: "test"
+runtime:
+  run: "test-run"

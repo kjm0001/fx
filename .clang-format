@@ -1,0 +1,8 @@
+BasedOnStyle: Google
+IncludeBlocks: Merge
+NamespaceIndentation: All
+SortIncludes: CaseInsensitive
+AllowShortBlocksOnASingleLine: Empty
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty

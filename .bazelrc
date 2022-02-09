@@ -1,0 +1,30 @@
+# Bazel ------------------------------------------------------------------------
+
+# Fixes issue where Protobuf keeps rebuilding. See:
+#   https://github.com/bazelbuild/bazel/issues/7095
+build --incompatible_strict_action_env
+test --incompatible_strict_action_env
+# Show test results on failed tests
+test --test_output=errors
+test --test_summary=terse
+# Show colors in gtest results
+test --test_env="GTEST_COLOR=1"
+# Only show failed tests
+test --test_env="GTEST_BRIEF=1"
+
+# C++ --------------------------------------------------------------------------
+
+# TODO(jathu): configure through cc_toolchain
+build --cxxopt=-std=c++17
+build --host_cxxopt=-std=c++17
+build --repo_env=CC=clang
+
+# Configs ----------------------------------------------------------------------
+
+build:tidy --aspects //tools/format:tidy.bzl%tidy_aspect 
+build:tidy --output_groups=report
+
+build:tidy-test --aspects //tools/format:tidy.bzl%tidy_aspect_check
+build:tidy-test --output_groups=report
+
+build:release --copt=-O3
