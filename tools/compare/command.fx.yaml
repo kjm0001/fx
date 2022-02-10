@@ -1,5 +1,0 @@
-descriptor_version: v1beta
-synopsis: Compare the current branch to the main branch.
-description: Open GitHub comparison view to show the delta between the current branch (on remote) to the main branch.
-runtime:
-  run: $FX_WORKSPACE_DIRECTORY/tools/compare/compare.sh

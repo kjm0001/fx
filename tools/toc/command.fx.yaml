@@ -1,4 +1,0 @@
-descriptor_version: v1beta
-synopsis: Update the README table of contents.
-runtime:
-  run: $FX_WORKSPACE_DIRECTORY/tools/toc/gh-md-toc.sh

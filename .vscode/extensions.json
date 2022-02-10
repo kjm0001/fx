@@ -1,7 +1,0 @@
-{
-    "recommendations": [
-        "StackBuild.bazel-stack-vscode",
-        "ms-vscode.cpptools",
-        "zxh404.vscode-proto3"
-    ]
-}

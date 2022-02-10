@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>fx &mdash; a workspace tool manager</title>
+  <meta name="viewport" content="width=device-width">
+  <meta name="keywords" content="cli, command, line, monorepo">
+  <meta name="author" content="Jathu Satkunarajah">
+  <link rel="stylesheet" href="style.css" media="screen" charset="utf-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-W4WQBEFMCP"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-W4WQBEFMCP');
+  </script>
+</head>
+<body>
+  <div id="container">
+    <div id="header">
+      <img id="header-logo" src = "assets/fx.png" alt="fx"/>
+      <h2><a href="https://github.com/jathu/fx">GitHub&#x2197;</a></h2>
+    </div>
+    <div id="banner">
+      <h2>Quickly create developer friendly CLI tools.</h2>
+      <br />
+      <p>fx is a workspace tool manager. It allows you to create consistent, discoverable, language-neutral and developer friendly command line tools.</p>
+    </div>
+    <div id="example-container">
+      <div class="example-description">
+        <h3>Example</h3>
+        <p>Suppose our large repository has multiple languages. Let's create a code formatter to support everything via <b>fx tools/format</b>.</p>
+
+        <p>Let's create a command named <i>tools/format</i> and describe it's interface:</p>
+      </div>
+      <div class="code-block">
+        <div class="code-block-prompt">
+          <div class="code-block-prompt-prefix">~/app $&nbsp;</div>
+          <div class="code-block-prompt-command">vim tools/format/command.fx.yaml</div>
+        </div>
+      </div>
+      <script src="https://gist.github.com/jathu/f3ab08cfad251615ed8f8b69a8e59fdb.js"></script>
+
+      <div class="example-description">
+        <p>Now, let's create the respective script in Python. The parsed arguments will be passed into the script as a single JSON argument.</p>
+      </div>
+      <script src="https://gist.github.com/jathu/ef72e2ec2b88ed217e6ffb9cbecfd9c6.js"></script>
+
+      <div class="example-description">
+        <p>The command now exists for everyone and is easily discoverable.</p>
+      </div>
+      <div class="code-block">
+        <div class="code-block-prompt">
+          <div class="code-block-prompt-prefix">~/app $&nbsp;</div>
+          <div class="code-block-prompt-command">fx</div>
+        </div>
+        <br />
+        <p>fx — workspace tool manager [version 0.1]</p>
+        <br />
+        <p>[workspace fx]</p>
+        <div class="tab">
+          <p>list - List available commands.</p>
+          <p>help - Learn more about fx.</p>
+          <p>version - Print the fx version.</p>
+        </div>
+        <br />
+        <p>[workspace ~/app/workspace.fx.yaml]</p>
+        <div class="tab">
+          <p>tools/format - Format and analyze code.</p>
+          <p>server/start - Start the backend server.</p>
+          <p>frontend/start - Start the frontend React server.</p>
+          <p>frontend/gql/gen - Generate the GraphQL bindings.</p>
+        </div>
+      </div>
+
+      <div class="example-description">
+        <p>It automatically includes a developer friendly help page.</p>
+      </div>
+      <div class="code-block">
+        <div class="code-block-prompt">
+          <div class="code-block-prompt-prefix">~/app $&nbsp;</div>
+          <div class="code-block-prompt-command">fx tools/format --help</div>
+        </div>
+        <br />
+        <p>fx tools/format — Format and analyze code.</p>
+        <br />
+        <div class="tab">
+          <p>usage: fx tools/format [-t|--test] [-l|--language=&lt;language...&gt;]</p>
+        </div>
+        <br />
+        <p>OPTIONS</p>
+        <div class="tab">
+          <p>--test, -t · bool · optional</p>
+          <div class="tab">
+            <p>Format test without overwriting.</p>
+            <p>Default: false</p>
+          </div>
+        </div>
+        <br />
+        <div class="tab">
+          <p>--language, -l · List&lt;string&gt; · optional</p>
+          <div class="tab">
+            <p>Format specific languages.</p>
+            <p>Default: all | Choices: all, cpp, c++, bazel</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-description">
+        <p>Now it's a lot easier to format code without having to remember everything.</p>
+      </div>
+      <div class="code-block">
+        <div class="code-block-prompt">
+          <div class="code-block-prompt-prefix">~/app $&nbsp;</div>
+          <div class="code-block-prompt-command">fx tools/format -l bazel -l c++</div>
+        </div>
+        <br />
+        <p>Formatting Bazel files...</p>
+        <p>Formatting C++ files...</p>
+      </div>
+
+      <div class="example-description">
+        <p>Tool discoverability, consistency and documentation will create a more developer friendly environment. <a href="https://github.com/jathu/fx">Add fx to your project today&#x2197;.</a></p>
+      </div>
+    </div> <!-- end: example-container -->
+  </div>
+</body>
+</html>
