@@ -51,7 +51,7 @@ Checkout the releases https://github.com/jathu/fx/releases. A better solution, p
 
 ## What is it?
 
-fx is a command line tool (CLI) that hosts and manages other CLIs. It takes care of the tedious parts of CLIs like argument parsing, validation, help/man pages and updates. fx has dynamic subcommands based on it's current directory — these subcommands are created by you, the user. Still don't understand? Walk through the step-by-step tutorial below.
+fx is a command line tool (CLI) that hosts and manages other CLIs. It takes care of the tedious parts of CLIs like argument parsing, validation, help/man pages and updates. fx has dynamic subcommands based on its current directory — these subcommands are created by you, the user. Want to learn more? Walk through the step-by-step tutorial below.
 
 ### Step-by-Step Example
 
