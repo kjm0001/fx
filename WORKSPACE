@@ -53,32 +53,19 @@ load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
 
 rules_pkg_dependencies()
 
-LLVM_VERSION = "llvmorg-13.0.0"
-
-LLVM_VERSION_SHA = "a1131358f1f9f819df73fa6bff505f2c49d176e9eef0a3aedd1fdbce3b4630e8"
+LLVM_VERSION = "llvmorg-15.0.0"
 
 http_archive(
-    name = "llvm-project-raw",
+    name = "llvm-raw",
     build_file = "//third_party:llvm.BUILD",
-    sha256 = LLVM_VERSION_SHA,
+    sha256 = "36d83cd84e1caf2bcfda1669c029e2b949adb9860cff01e7d3246ac2348b11ae",
     strip_prefix = "llvm-project-{0}".format(LLVM_VERSION),
-    urls = ["https://github.com/llvm/llvm-project/archive/refs/tags/{0}.tar.gz".format(LLVM_VERSION)],
+    url = "https://github.com/llvm/llvm-project/archive/refs/tags/{0}.tar.gz".format(LLVM_VERSION),
 )
 
-http_archive(
-    name = "llvm-bazel",
-    sha256 = LLVM_VERSION_SHA,
-    strip_prefix = "llvm-project-{0}/utils/bazel".format(LLVM_VERSION),
-    urls = ["https://github.com/llvm/llvm-project/archive/refs/tags/{0}.tar.gz".format(LLVM_VERSION)],
-)
+load("@llvm-raw//utils/bazel:configure.bzl", "llvm_configure", "llvm_disable_optional_support_deps")
 
-load("@llvm-bazel//:configure.bzl", "llvm_configure", "llvm_disable_optional_support_deps")
-
-llvm_configure(
-    name = "llvm-project",
-    src_path = ".",
-    src_workspace = "@llvm-project-raw//:WORKSPACE",
-)
+llvm_configure(name = "llvm-project")
 
 llvm_disable_optional_support_deps()
 

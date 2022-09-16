@@ -193,8 +193,8 @@ def _create_aspect(lint_mode):
                 default = Label("@llvm-project//clang:builtin_headers_gen"),
             ),
             "_clang_tidy": attr.label(
-                default = Label("@llvm-project-raw//:clang-tidy"),
-                cfg = "host",
+                default = Label("@llvm-raw//:clang_tidy"),
+                cfg = "exec",
                 executable = True,
                 allow_single_file = True,
             ),
@@ -208,7 +208,7 @@ def _create_aspect(lint_mode):
             ),
             "_clang_format": attr.label(
                 default = Label("@llvm-project//clang:clang-format"),
-                cfg = "host",
+                cfg = "exec",
                 executable = True,
                 allow_single_file = True,
             ),

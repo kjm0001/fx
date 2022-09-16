@@ -26,7 +26,7 @@ struct Convert : testing::Test {
 };
 
 TEST_F(Convert, EmptyRoot) {
-  YAML::Node yaml;
+  const YAML::Node yaml;
 
   expect_convert_fail(
       yaml,
@@ -35,7 +35,7 @@ TEST_F(Convert, EmptyRoot) {
 }
 
 TEST_F(Convert, ScalarRoot) {
-  YAML::Node yaml = YAML::Load("416");
+  const YAML::Node yaml = YAML::Load("416");
 
   expect_convert_fail(
       yaml,
@@ -71,7 +71,7 @@ struct ParseMap : testing::Test {
 };
 
 TEST_F(ParseMap, Empty) {
-  YAML::Node yaml = YAML::Load("{}");
+  const YAML::Node yaml = YAML::Load("{}");
 
   expect_parse_eq(yaml, R"({})"_json);
 }
@@ -147,7 +147,7 @@ struct ParseSequence : testing::Test {
 };
 
 TEST_F(ParseSequence, Empty) {
-  YAML::Node yaml = YAML::Load("[]");
+  const YAML::Node yaml = YAML::Load("[]");
 
   expect_parse_eq(yaml, R"([])"_json);
 }

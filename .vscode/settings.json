@@ -110,7 +110,11 @@
         "semaphore": "cpp",
         "shared_mutex": "cpp",
         "hash_map": "cpp",
-        "hash_set": "cpp"
+        "hash_set": "cpp",
+        "propagate_const": "cpp",
+        "__verbose_abort": "cpp",
+        "cuchar": "cpp",
+        "format": "cpp"
     },
     "bsv.bzl.remoteCache.autoLaunch": false
 }

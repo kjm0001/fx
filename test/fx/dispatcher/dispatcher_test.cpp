@@ -83,7 +83,7 @@ class SuccessfulCommand : public fx::command::Base {
  public:
   fx::result::Result<void> run(
       const std::vector<std::string>& arguments) override {
-    std::vector<std::string> expected{"test", "ok"};
+    const std::vector<std::string> expected{"test", "ok"};
     EXPECT_EQ(expected, arguments);
     return fx::result::Ok();
   }

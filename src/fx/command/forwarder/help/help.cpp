@@ -64,8 +64,8 @@ namespace fx::command::forwarder::help {
       for (const auto& argument : descriptor.arguments()) {
         coerce_value(argument, [&](auto value) {
           std::vector<std::string> header_components{};
-          std::string name = fmt::format("{0:>{1}}", argument.name(),
-                                         argument.name().size() + INDENT);
+          const std::string name = fmt::format("{0:>{1}}", argument.name(),
+                                               argument.name().size() + INDENT);
           header_components.emplace_back(name);
           header_components.emplace_back(
               fmt::format(value.list ? "List<{}>" : "{}", value.type_name));
@@ -130,9 +130,9 @@ namespace fx::command::forwarder::help {
 
   std::string wrap(const std::string& content,
                    std::string::size_type left_padding) {
-    std::string padding = fmt::format("{0:<{1}}", "", left_padding);
+    const std::string padding = fmt::format("{0:<{1}}", "", left_padding);
     std::string result{};
-    std::string::size_type max_width = WIDTH - left_padding;
+    const std::string::size_type max_width = WIDTH - left_padding;
 
     std::vector<std::string> lines;
     boost::algorithm::split_regex(lines, content, boost::regex("\n"));

@@ -6,8 +6,8 @@ namespace fx::util {
   bool icompare(std::string const& left, std::string const& right) {
     if (left.size() == right.size()) {
       return std::equal(right.begin(), right.end(), left.begin(), left.end(),
-                        [](char l, char r) {
-                          return std::tolower(l) == std::tolower(r);
+                        [](char lchar, char rchar) {
+                          return std::tolower(lchar) == std::tolower(rchar);
                         });
     }
 
@@ -16,9 +16,10 @@ namespace fx::util {
 
   std::string lower(std::string const& str) {
     auto copy = str;
-    std::transform(copy.begin(), copy.end(), copy.begin(), [](unsigned char c) {
-      return std::tolower(c);
-    });
+    std::transform(copy.begin(), copy.end(), copy.begin(),
+                   [](unsigned char cur_char) {
+                     return std::tolower(cur_char);
+                   });
     return copy;
   }
 

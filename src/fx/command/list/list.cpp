@@ -38,7 +38,7 @@ namespace fx::command {
                  "\nYou are not in a workspace.\n");
     } else {
       const auto& workspace_path = workspace_path_result.value();
-      fmt::print("\n[workspace {0}]\n", std::string(workspace_path));
+      fmt::print("\n[workspace {0}]\n", workspace_path.u8string());
 
       const auto workspace_result =
           fx::parser::parse_workspace_descriptor(workspace_path);
@@ -65,13 +65,13 @@ namespace fx::command {
     const auto descriptor_paths =
         list_command_descriptor_paths(workspace_descriptor_path, workspace);
     const auto workspace_directory_size =
-        std::string(workspace_descriptor_path.parent_path()).size() + 1;
+        workspace_descriptor_path.parent_path().u8string().size() + 1;
 
     for (auto const& descriptor_path : descriptor_paths) {
       search_result_t search_result;
       search_result.command_name =
-          std::string(descriptor_path.parent_path())
-              .replace(0, workspace_directory_size, "");
+          descriptor_path.parent_path().u8string().replace(
+              0, workspace_directory_size, "");
       const auto descriptor_result =
           fx::parser::parse_command_descriptor(descriptor_path);
       if (descriptor_result.ok()) {
@@ -108,7 +108,7 @@ namespace fx::command {
     if (!workspace_descriptor_path.empty()) {
       std::filesystem::recursive_directory_iterator current_entry(
           workspace_descriptor_path.parent_path());
-      std::filesystem::recursive_directory_iterator end_entry;
+      const std::filesystem::recursive_directory_iterator end_entry;
       for (; current_entry != end_entry; current_entry++) {
         auto const filename = current_entry->path().filename();
         if (filename == "command.fx.yaml") {
@@ -118,7 +118,7 @@ namespace fx::command {
                    (paths_to_ignore.find(current_entry->path()) !=
                     paths_to_ignore.end())) {
           spdlog::debug("Ignoring command search in {0}",
-                        std::string(current_entry->path()));
+                        current_entry->path().u8string());
           current_entry.disable_recursion_pending();
         }
       }

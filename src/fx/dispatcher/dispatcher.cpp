@@ -40,7 +40,7 @@ namespace fx::dispatcher {
     } else if (arguments[0] == "version") {
       _command = std::make_shared<fx::command::Version>();
     } else {
-      const auto command_name = arguments[0];
+      const auto& command_name = arguments[0];
       _command = std::make_shared<fx::command::Forwarder>(command_name);
       _arguments =
           std::vector<std::string>{arguments.begin() + 1, arguments.end()};

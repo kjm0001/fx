@@ -12,21 +12,21 @@ namespace fx::parser {
       yaml = YAML::LoadFile(descriptor_path);
     } catch (...) {
       return fx::result::Error(
-          fmt::format("Unable to read {0}.", std::string(descriptor_path)));
+          fmt::format("Unable to read {0}.", descriptor_path.u8string()));
     }
 
     nlohmann::json json;
     const auto json_result = fx::parser::yaml_to_json::convert(yaml, json);
     if (json_result.failed()) {
       return fx::result::Error(fmt::format("Invalid descriptor: {0}. {1}",
-                                           std::string(descriptor_path),
+                                           descriptor_path.u8string(),
                                            json_result.error()));
     }
 
     const auto descriptor_result = json_to_descriptor<D>(json);
     if (descriptor_result.failed()) {
       return fx::result::Error(fmt::format("Invalid descriptor: {0}. {1}",
-                                           std::string(descriptor_path),
+                                           descriptor_path.u8string(),
                                            descriptor_result.error()));
     }
 
@@ -34,7 +34,7 @@ namespace fx::parser {
         fx::parser::validator::validate_descriptor(descriptor_result.value());
     if (validation_result.failed()) {
       return fx::result::Error(fmt::format("Invalid descriptor: {0}. {1}",
-                                           std::string(descriptor_path),
+                                           descriptor_path.u8string(),
                                            validation_result.error()));
     }
 

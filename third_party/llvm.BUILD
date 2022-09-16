@@ -1,4 +1,4 @@
-load("@llvm-bazel//:llvm-project-overlay/llvm/template_rule.bzl", "template_rule")
+load("@llvm-raw//utils/bazel/llvm-project-overlay/llvm:template_rule.bzl", "template_rule")
 
 template_rule(
     name = "clang_tidy_config",
@@ -10,11 +10,33 @@ template_rule(
 )
 
 cc_binary(
-    name = "clang-tidy",
-    srcs = [":clang_tidy_config"] + glob([
-        "clang-tools-extra/clang-tidy/**/*.cpp",
-        "clang-tools-extra/clang-tidy/**/*.h",
-    ]),
+    name = "clang_tidy_make_confusable_table",
+    srcs = ["clang-tools-extra/clang-tidy/misc/ConfusableTable/BuildConfusableTable.cpp"],
+    deps = [
+        "@llvm-project//llvm:Support",
+    ],
+)
+
+genrule(
+    name = "clang_tidy_confusables",
+    srcs = ["clang-tools-extra/clang-tidy/misc/ConfusableTable/confusables.txt"],
+    outs = ["Confusables.inc"],
+    cmd = "$(location :clang_tidy_make_confusable_table) $(SRCS) $(OUTS)",
+    exec_tools = [":clang_tidy_make_confusable_table"],
+)
+
+cc_binary(
+    name = "clang_tidy",
+    srcs = [
+        ":clang_tidy_config",
+        ":clang_tidy_confusables",
+    ] + glob(
+        [
+            "clang-tools-extra/clang-tidy/**/*.cpp",
+            "clang-tools-extra/clang-tidy/**/*.h",
+        ],
+        exclude = ["clang-tools-extra/clang-tidy/misc/ConfusableTable/**/*"],
+    ),
     stamp = 0,
     visibility = ["//visibility:public"],
     deps = [

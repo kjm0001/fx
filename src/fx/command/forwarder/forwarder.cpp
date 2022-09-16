@@ -105,11 +105,11 @@ namespace fx::command {
       const std::filesystem::path& workspace_descriptor_path) {
     std::vector<std::string> envvars{
         fmt::format("FX_WORKSPACE_DIRECTORY={0}",
-                    std::string(workspace_descriptor_path.parent_path()))};
+                    workspace_descriptor_path.parent_path().u8string())};
 
     char** current_envvar_pointer = environ;
     for (; *current_envvar_pointer != nullptr; current_envvar_pointer++) {
-      envvars.emplace_back(std::string(*current_envvar_pointer));
+      envvars.emplace_back(*current_envvar_pointer);
     }
 
     return envvars;
